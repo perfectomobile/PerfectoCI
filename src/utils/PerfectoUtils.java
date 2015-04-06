@@ -6,8 +6,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.regexp.recompile;
@@ -17,7 +19,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import jxl.Cell;
@@ -134,6 +135,22 @@ public class PerfectoUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void startApp(String appName,RemoteWebDriver d )
+	{
+ 		Map<String,String> params = new HashMap<String,String>();
+		params.put("name", appName);
+		d.executeScript("mobile:application:open", params);
+	}
+	public static void swipe(String start,String end,RemoteWebDriver d )
+	{
+ 		Map<String,String> params = new HashMap<String,String>();
+		params.put("start", start);  //50%,50%
+		params.put("end", end);  //50%,50%
+
+		d.executeScript("mobile:touch:swipe", params);
+		
 	}
 	private static void sleep(long millis) {
 		try {
