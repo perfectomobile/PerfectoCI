@@ -3,8 +3,8 @@
 <suite name="testList" parallel="classes" thread-count="5">
 	<test name="Test">
 		<classes>
-			 <class name="test.test2" />    
-			<class name="test.test1" />  
+			 <class name="test.StarbucksLogin" />    
+			<!--  class name="test.test1" />  -->  
 			<!--  class name="test.P2ELogin" /-->
 		</classes>
 

@@ -26,5 +26,23 @@ public class test2 extends basicTest{
 		PerfectoUtils.closeTest(_driver);
 		}
 
+	@Override
+	public void beforeTest() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void execTest() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void endTest() {
+		// TODO Auto-generated method stub
+		
+	}
+
  
 }

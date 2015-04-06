@@ -3,7 +3,7 @@ package test;
 import java.lang.reflect.Method;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
- import org.testng.annotations.Test;
+import org.testng.annotations.Test;
 
 import utils.PerfectoUtils;
 
@@ -15,5 +15,24 @@ public class test1 extends basicTest{
 		setUpDriver(PerfectoUtils.getDriver(caps));
 		PerfectoUtils.getScreenShot(_driver, caps.getCapability("description").toString()+"_"+method.getName());
 		PerfectoUtils.closeTest(_driver);
+		
 		}
+
+	@Override
+	public void beforeTest() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void execTest() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void endTest() {
+		// TODO Auto-generated method stub
+		
+	}
 }
