@@ -9,19 +9,15 @@ import org.testng.annotations.Test;
 import utils.PerfectoUtils;
 
 public class StarbucksLogin extends basicTest{
-
-	DesiredCapabilities _caps;
-	Method _method;
+ 
 	 // Test (dataProvider="Capabilities",groups = { "STARBUCKS", "P1", "ALL" })
 	@Test (dataProvider="Capabilities" )	
 	public void login(DesiredCapabilities caps, Method method) {
 	
 		System.out.println("START WITH CAP "+  caps.toString());
- 		_caps=caps;
-		_method = method;
-
+  
 		try {
-			beforeTest();
+			beforeTest(caps);
 			execTest();
 		} catch (Exception e) {
 			System.out.println("StarbucksLogin ended with Error");
@@ -33,18 +29,22 @@ public class StarbucksLogin extends basicTest{
 
 
 	}
+	
 
 	@Override
-	public void beforeTest() throws Exception {
-
-	 System.out.println("StarbucksLogin"+_caps.getCapability("description"));
-		// add the Perfecto native tree capability   
- 		_caps.setCapability("automationName", "PerfectoMobile");
-		setUpDriver(PerfectoUtils.getDriver(_caps));
-		// open app
-		switchToContext(_driver, "NATIVE_APP");
-		PerfectoUtils.startApp("Starbucks",_driver);
+	public void beforeTest(DesiredCapabilities caps) throws Exception {
+		 System.out.println("StarbucksLogin"+caps.getCapability("description"));
+			// add the Perfecto native tree capability   
+	 		caps.setCapability("automationName", "PerfectoMobile");
+			setUpDriver(PerfectoUtils.getDriver(caps));
+			// open app
+			switchToContext(_driver, "NATIVE_APP");
+			PerfectoUtils.startApp("Starbucks",_driver);
+		
 	}
+
+
+	 
 
 	@Override
 	public void execTest() throws Exception {
@@ -54,7 +54,7 @@ public class StarbucksLogin extends basicTest{
 			starbucks.login login = new starbucks.login(_driver);
  
 			login.with("uzi.eilon@gmail.com", "Perfecto1");
-		 	PerfectoUtils.getScreenShot(_driver, _caps.getCapability("description").toString()+"_"+_method.getName());
+		// 	PerfectoUtils.getScreenShot(_driver, _caps.getCapability("description").toString()+"_"+_method.getName());
 			//Change to OCR
 			switchToContext(_driver, "VISUAL");
 			login.validatevalidateFirstPage();
@@ -62,7 +62,7 @@ public class StarbucksLogin extends basicTest{
 
 
 		} catch (Exception e) {
-		 	PerfectoUtils.getScreenShot(_driver, _caps.getCapability("description").toString()+"_"+_method.getName());
+		 //	PerfectoUtils.getScreenShot(_driver, _caps.getCapability("description").toString()+"_"+_method.getName());
 
 		}finally
 		{

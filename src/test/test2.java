@@ -27,7 +27,7 @@ public class test2 extends basicTest{
 		}
 
 	@Override
-	public void beforeTest() throws Exception {
+	public void beforeTest(DesiredCapabilities caps) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

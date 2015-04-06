@@ -38,7 +38,7 @@ public abstract class basicTest {
 		}		return objects.iterator();
 	}
 	
-	public abstract void beforeTest() throws Exception ;
+	public abstract void beforeTest(DesiredCapabilities caps) throws Exception ;
 	public abstract void execTest() throws Exception ;
 	public abstract void endTest()  ;
 	
