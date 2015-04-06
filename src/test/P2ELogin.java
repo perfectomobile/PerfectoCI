@@ -10,29 +10,60 @@ import utils.PerfectoUtils;
 
 public class P2ELogin extends basicTest{
 
+	DesiredCapabilities _caps;
+	Method _method;
 	@Test (dataProvider="Capabilities",groups = { "P2E", "P1", "ALL" })  
-
 	public void login(DesiredCapabilities caps, Method method) {
-		System.out.println("P2e"+caps.getCapability("description"));
-		setUpDriver(PerfectoUtils.getDriver(caps));
+		_caps=caps;
+		_method = method;
+		
+		try {
+			 beforeTest();
+			 execTest();
+		} catch (Exception e) {
+			System.out.println("P2ELogin ended with Error");
+
+		}finally
+		{
+			 endTest();
+		}
+		
+	}
+
+	@Override
+	public void beforeTest() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void execTest() throws Exception {
+		System.out.println("P2e"+_caps.getCapability("description"));
+		setUpDriver(PerfectoUtils.getDriver(_caps));
 
 		try {
 			P2E.login login = new P2E.login(_driver);
 			login.with("bcl1127", "test");
-			PerfectoUtils.getScreenShot(_driver, caps.getCapability("description").toString()+"_"+method.getName());
+			PerfectoUtils.getScreenShot(_driver, _caps.getCapability("description").toString()+"_"+_method.getName());
 			
 			P2E.settingMenu setting = new P2E.settingMenu(_driver);
 			setting.logout();
 			
 		} catch (Exception e) {
-			PerfectoUtils.getScreenShot(_driver, caps.getCapability("description").toString()+"_"+method.getName());
+			PerfectoUtils.getScreenShot(_driver, _caps.getCapability("description").toString()+"_"+_method.getName());
 			
 		}finally
 		{
-			PerfectoUtils.closeTest(_driver);
+			endTest();
 		}
 
-		PerfectoUtils.closeTest(_driver);
+		endTest();
+		
+	}
+
+	@Override
+	public void endTest()  {
+		PerfectoUtils.closeTest(_driver);		
 	}
 	 
 
