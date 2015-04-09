@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import utils.PerfectoUtils;
 
-public class P2ELogin extends basicTest{
+public abstract class P2ELogin extends basicTest{
 
 	DesiredCapabilities _caps;
 	Method _method;
@@ -18,7 +18,7 @@ public class P2ELogin extends basicTest{
 		_method = method;
 		
 		try {
-			 beforeTest();
+			 beforeTest(_caps);
 			 execTest();
 		} catch (Exception e) {
 			System.out.println("P2ELogin ended with Error");
@@ -31,7 +31,7 @@ public class P2ELogin extends basicTest{
 	}
 
 	@Override
-	public void beforeTest() throws Exception {
+	public void beforeTest(DesiredCapabilities caps) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
