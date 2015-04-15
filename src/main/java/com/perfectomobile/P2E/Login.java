@@ -2,6 +2,7 @@ package com.perfectomobile.P2E;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 
 import com.perfectomobile.utils.BaseObject;
@@ -15,7 +16,7 @@ public class Login extends BaseObject {
 
 	private By mainManunavigator = By.xpath("//*[@class='k-input']");
 
-	public Login(WebDriver driver) {
+	public Login(RemoteWebDriver driver) {
 		super(driver);
 		getDriver().get("https://p2afetest.p2energysolutions.com/P2AFE");
 		Assert.assertTrue(isDisplayed(loginSubmitLocator),

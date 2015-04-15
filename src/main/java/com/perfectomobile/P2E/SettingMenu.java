@@ -1,7 +1,7 @@
 package com.perfectomobile.P2E;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.perfectomobile.utils.BaseObject;
 
@@ -11,7 +11,7 @@ public class SettingMenu extends BaseObject {
 	private By logoutOpt = By.xpath("//li[@id='logOut']/a");
 	private By aboutOPT = By.id("aboutItem");
 
-	public SettingMenu(WebDriver driver) {
+	public SettingMenu(RemoteWebDriver driver) {
 		super(driver);
 	}
 
