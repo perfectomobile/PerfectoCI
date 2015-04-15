@@ -1,8 +1,8 @@
-package test;
+package com.perfectomobile.test;
 
 import org.testng.annotations.Test;
 
-public class test3 {
+public class Test3 {
   @Test
   public void f() {
 	  System.out.println("Test3 in Test");
