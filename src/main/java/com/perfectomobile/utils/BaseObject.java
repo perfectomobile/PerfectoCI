@@ -3,15 +3,16 @@ package com.perfectomobile.utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BaseObject {
 
-	private WebDriver driver;
+	private RemoteWebDriver driver;
 
-	public BaseObject(WebDriver driver) {
+	public BaseObject(RemoteWebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -65,8 +66,18 @@ public class BaseObject {
 		wait.until(condition);
 	}
 
-	public WebDriver getDriver() {
+	public RemoteWebDriver getDriver() {
 		return driver;
 	}
+	
+	public void switchToVisual() {
+		
+		PerfectoUtils.switchToContext(driver, "VISUAL");
+	}
 
+	public void switchToNative() {
+		
+		PerfectoUtils.switchToContext(driver, "NATIVE_APP");
+	}
+	
 }

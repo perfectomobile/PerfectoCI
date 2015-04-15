@@ -19,6 +19,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.DriverCommand;
+import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import jxl.Cell;
@@ -47,9 +49,9 @@ public class PerfectoUtils {
 
 				System.out.println("Run started");
 				try {
-					String host = "demo.perfectomobile.com";
-					String user = URLEncoder.encode("uzie@perfectomobile.com", "UTF-8");
-					String password = URLEncoder.encode("Perfecto1", "UTF-8");
+					String host = "qatestlab.perfectomobile.com";
+					String user = URLEncoder.encode("admint", "UTF-8");
+					String password = URLEncoder.encode("admin", "UTF-8");
 					//				
 					driver = new RemoteWebDriver(new URL("https://" + user + ':' + password + '@' + host + "/nexperience/wd/hub"), cap);
 					return driver;
@@ -159,6 +161,15 @@ public class PerfectoUtils {
 			Thread.sleep(millis);
 		} catch (InterruptedException e) {
 		}
+		
 	}
+	
+	public static void switchToContext(RemoteWebDriver driver, String context) {
+		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod(driver);
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("name", context);
+		executeMethod.execute(DriverCommand.SWITCH_TO_CONTEXT, params);
+	}
+	
 
 }
