@@ -1,5 +1,8 @@
 package com.perfectomobile.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,6 +29,25 @@ public class BaseObject {
 
 	public void click(By locator) {
 		find(locator).click();
+	}
+
+	public Boolean swipeAndSearch(By locator, String start, String end, Integer attempts) {
+		boolean isFound = false;
+		while (!isFound && attempts > 0)
+		{
+			String result = find(locator).getAttribute("isvisible");
+			isFound = Boolean.valueOf(result);
+			if (!isFound) {
+				String commandStartApp = "mobile:touch:swipe";
+				Map<String, Object> paramsSwipe = new HashMap<>();
+				paramsSwipe.put("start",start);
+				paramsSwipe.put("end",end);
+				driver.executeScript(commandStartApp, paramsSwipe);
+				attempts--;
+			}
+		} 
+
+		return isFound;
 	}
 
 	public void type(String inputText, By locator) {
@@ -69,15 +91,15 @@ public class BaseObject {
 	public RemoteWebDriver getDriver() {
 		return driver;
 	}
-	
+
 	public void switchToVisual() {
-		
+
 		PerfectoUtils.switchToContext(driver, "VISUAL");
 	}
 
 	public void switchToNative() {
-		
+
 		PerfectoUtils.switchToContext(driver, "NATIVE_APP");
 	}
-	
+
 }

@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import com.perfectomobile.starbucks.Login;
 import com.perfectomobile.starbucks.MainPage;
+import com.perfectomobile.starbucks.Settings;
 import com.perfectomobile.utils.PerfectoUtils;
 
 public class StarbucksLogin extends BasicTest {
@@ -23,10 +24,10 @@ public class StarbucksLogin extends BasicTest {
 		try {
 			driver = beforeTest(caps);
 			
-			
 			Login login = new Login(driver);
 			MainPage mp = login.with("uzi.eilon@gmail.com", "Perfecto1", "Uzi");
-			mp.goToSettingPage();
+			Settings settings = mp.goToSettingPage();
+			settings.signout();
 			
 			// PerfectoUtils.getScreenShot(_driver,
 			// _caps.getCapability("description").toString()+"_"+_method.getName());

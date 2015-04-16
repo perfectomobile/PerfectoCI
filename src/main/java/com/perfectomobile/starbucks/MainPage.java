@@ -18,10 +18,12 @@ public class MainPage extends BaseObject {
 		super(driver);
 	}
 
-	public void goToSettingPage() {
+	public Settings goToSettingPage() {
 
 		click(settingsBTLocator);
+		Settings settings = new Settings(super.getDriver());
 		
+		return settings;
 		//waitForIsDisplayed(loginValidateByOCR, 40);
 		
 	}
