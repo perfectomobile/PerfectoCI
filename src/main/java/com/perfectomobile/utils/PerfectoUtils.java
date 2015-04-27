@@ -1,15 +1,19 @@
 package com.perfectomobile.utils;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.regexp.recompile;
@@ -39,24 +43,23 @@ public class PerfectoUtils {
 
 	public static RemoteWebDriver getDriver(DesiredCapabilities cap)
 	{
+		System.out.println("Current capabilities " + cap.toString());
 
 		RemoteWebDriver driver;
 		boolean waitForDevice = true;
 		int index = 10;
 		do {
 			try{
-				System.out.println("Current capabilities " + cap.toString());
-
-				System.out.println("Run started");
 				try {
-					String host = "qatestlab.perfectomobile.com";
-					String user = URLEncoder.encode("admint", "UTF-8");
-					String password = URLEncoder.encode("admin", "UTF-8");
-					//				
-					driver = new RemoteWebDriver(new URL("https://" + user + ':' + password + '@' + host + "/nexperience/wd/hub"), cap);
+					String host = System.getProperty("np.testHost", "myCloud.perfectomobile.com");
+					String username = URLEncoder.encode(System.getProperty("np.testUsername", "myUser"), "UTF-8");
+					String password = URLEncoder.encode(System.getProperty("np.testPassword", "myPassword"), "UTF-8");
+
+					driver = new RemoteWebDriver(new URL("https://" + username + ':' + password + '@' + host + "/nexperience/wd/hub"), cap);
+					System.out.println("Run started");
 					return driver;
 
-				} catch (  MalformedURLException | UnsupportedEncodingException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -74,12 +77,12 @@ public class PerfectoUtils {
 				}
 			}
 
-		} while (waitForDevice && index > 0); //Utils.continueTest()
+		} while (waitForDevice && index > 0);
 		return null;
 
 	}
-
-	public static List<DesiredCapabilities>  readFromExecl(String inputFile)
+	
+	public static List<DesiredCapabilities> readFromExecl(String inputFile)
 	{
 		ClassLoader classLoader = PerfectoUtils.class.getClassLoader();
 		File inputWorkbook = new File(classLoader.getResource(inputFile).getFile());
@@ -140,36 +143,36 @@ public class PerfectoUtils {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void startApp(String appName,RemoteWebDriver d )
 	{
- 		Map<String,String> params = new HashMap<String,String>();
+		Map<String,String> params = new HashMap<String,String>();
 		params.put("name", appName);
 		d.executeScript("mobile:application:open", params);
 	}
 	public static void swipe(String start,String end,RemoteWebDriver d )
 	{
- 		Map<String,String> params = new HashMap<String,String>();
+		Map<String,String> params = new HashMap<String,String>();
 		params.put("start", start);  //50%,50%
 		params.put("end", end);  //50%,50%
 
 		d.executeScript("mobile:touch:swipe", params);
-		
+
 	}
 	private static void sleep(long millis) {
 		try {
 			Thread.sleep(millis);
 		} catch (InterruptedException e) {
 		}
-		
+
 	}
-	
+
 	public static void switchToContext(RemoteWebDriver driver, String context) {
 		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod(driver);
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("name", context);
 		executeMethod.execute(DriverCommand.SWITCH_TO_CONTEXT, params);
 	}
-	
+
 
 }

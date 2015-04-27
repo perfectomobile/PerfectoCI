@@ -18,7 +18,6 @@ public class StarbucksLogin extends BasicTest {
 	@Test(dataProvider = "Capabilities")
 	public void login(DesiredCapabilities caps, Method method) {
 
-		System.out.println("START WITH CAP " + caps.toString());
 		RemoteWebDriver driver = null;
 		
 		try {
@@ -48,9 +47,10 @@ public class StarbucksLogin extends BasicTest {
 
 	@Override
 	public RemoteWebDriver beforeTest(DesiredCapabilities caps) throws Exception {
-		System.out.println("StarbucksLogin" + caps.getCapability("description"));
+		System.out.println("StarbucksLogin description: " + caps.getCapability("description"));
 		// add the Perfecto native tree capability
 		caps.setCapability("automationName", "PerfectoMobile");
+		
 		RemoteWebDriver driver = PerfectoUtils.getDriver(caps);
 		// open app
 		switchToContext(driver, "NATIVE_APP");
