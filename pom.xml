@@ -24,7 +24,7 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-		</plugins>
+		
 		
 		<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -61,7 +61,7 @@
 					</execution>
 				</executions>
 			</plugin>
-		
+	</plugins>	
 	</build>
 
 	<dependencies>
