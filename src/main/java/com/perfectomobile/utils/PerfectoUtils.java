@@ -101,7 +101,7 @@ public class PerfectoUtils {
 			// start from 1 > don't want to run on title raw
 			for (int rowNum = 1; rowNum < sheet.getRows(); rowNum++) {
 				//create DC per line 
-				capabilities = new DesiredCapabilities("MobileOS", "", Platform.ANY);
+				capabilities = new DesiredCapabilities("mobileOS", "", Platform.ANY);
 
 				for (int col = 0; col < sheet.getColumns(); col++) { 
 					Cell cell = sheet.getCell(col,rowNum);
