@@ -51,11 +51,12 @@ public class PerfectoUtils {
 		do {
 			try{
 				try {
-					String host = System.getProperty("np.testHost", "myCloud.perfectomobile.com");
-					String username = URLEncoder.encode(System.getProperty("np.testUsername", "myUser"), "UTF-8");
-					String password = URLEncoder.encode(System.getProperty("np.testPassword", "myPassword"), "UTF-8");
+					String host = System.getProperty("np.testHost", "qatestlab.perfectomobile.com");
+					String username = URLEncoder.encode(System.getProperty("np.testUsername", "test_automation@gmail.com"), "UTF-8");
+					String password = URLEncoder.encode(System.getProperty("np.testPassword", "Test_automation"), "UTF-8");
 
-					driver = new RemoteWebDriver(new URL("https://" + username + ':' + password + '@' + host + "/nexperience/wd/hub"), cap);
+				   driver = new RemoteWebDriver(new URL("https://" + username + ':' + password + '@' + host + "/nexperience/wd/hub"), cap);
+					//driver = new RemoteWebDriver(cap);
 					System.out.println("Run started");
 					return driver;
 
@@ -143,13 +144,27 @@ public class PerfectoUtils {
 			e.printStackTrace();
 		}
 	}
-
+	public static void installApp(String appLocation,RemoteWebDriver d )
+	{
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("repo", appLocation);
+		d.executeScript("mobile:application:install", params);
+	}
+	
+	
 	public static void startApp(String appName,RemoteWebDriver d )
 	{
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("name", appName);
 		d.executeScript("mobile:application:open", params);
 	}
+	public static void uninstallApp(String appName,RemoteWebDriver d )
+	{
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("name", appName);
+		d.executeScript("mobile:application:uninstall", params);
+	}
+	
 	public static void swipe(String start,String end,RemoteWebDriver d )
 	{
 		Map<String,String> params = new HashMap<String,String>();

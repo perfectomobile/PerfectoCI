@@ -10,10 +10,11 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class BaseObject {
 
-	private RemoteWebDriver driver;
+	protected RemoteWebDriver driver;
 
 	public BaseObject(RemoteWebDriver driver) {
 		this.driver = driver;
@@ -88,6 +89,12 @@ public class BaseObject {
 		wait.until(condition);
 	}
 
+	public void textIsOnPage(WebElement textToFind)		 {
+	 textToFind = driver.findElement(By.xpath("//*[contains(.,'textToFind')]")); 
+	 Assert.assertEquals("Text found!", textToFind);
+	}
+	
+	
 	public RemoteWebDriver getDriver() {
 		return driver;
 	}
