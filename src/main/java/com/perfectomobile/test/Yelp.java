@@ -48,21 +48,23 @@ public class Yelp extends BasicTest {
 			PerfectoUtils.getScreenShot(driver, "Nordstrom Burlington,MA map");
 			MapPage map = new MapPage(driver);
 			map.list();
+			listBy.filter();
 			FilterPage filter =new FilterPage(driver);
-			filter.$$$TB();
+			filter.$$$buttonPrice(true);
+			filter.ok();
+//			return to list page
 			SearchPage search = new SearchPage(driver);
 			search.clickMenuItem("75 Middlesex Tpke");
 			By parkingLocator= By.xpath("//text[text()='Parking:']");
-			search.swipeAndSearch(parkingLocator, "50%,20%","50%,70%",5);
-			WebElement parking = driver.findElementByXPath("//text[text()='Parking:']");
-			WebElement textElement = parking.findElement(By.xpath("//.row/text[2]"));
-			 Assert.assertEquals("Text found!", textElement);
-			
-
+			search.swipeAndSearch(parkingLocator, "50%,80%","50%,20%",2);
+//			WebElement parking = driver.findElementByXPath("//text[text()='Parking:']");
+//			relative xpath finding the value of parking
+			WebElement textElement = driver.findElementByXPath("//text[text()='Parking:']//../text[2]");	
+			Assert.assertEquals(textElement.getText(), "Lot");
 			
 		} catch (Exception e) {
 			System.out.println("Yelp ended with Error");
-
+			e.printStackTrace();
 		} finally {
 			endTest(driver);
 		}
@@ -80,9 +82,9 @@ public class Yelp extends BasicTest {
 		// open app
 		switchToContext(driver, "NATIVE_APP");
 		
-		Object Platform =driver.getCapabilities().getCapability("platformName");
+		String Platform =driver.getCapabilities().getCapability("platformName").toString();
 		if (Platform.equals("Android")){
-			PerfectoUtils.installApp("http://nxc.co.il/rwd/Yelp_2.5.0.apk" , driver);
+			PerfectoUtils.installApp("PUBLIC:Android\\Yelp_2.5.0.apk" , driver);
 		}
 		PerfectoUtils.startApp("Yelp", driver);
 		return driver;
@@ -91,7 +93,7 @@ public class Yelp extends BasicTest {
 
 	@Override
 	public void endTest(RemoteWebDriver driver) {
-		PerfectoUtils.uninstallApp("Yelp", driver);
+	//	PerfectoUtils.uninstallApp("Yelp", driver);
 		PerfectoUtils.closeTest(driver);
 	}
 

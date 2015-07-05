@@ -49,7 +49,7 @@ public class StarbucksLogin extends BasicTest {
 	public RemoteWebDriver beforeTest(DesiredCapabilities caps) throws Exception {
 		System.out.println("StarbucksLogin description: " + caps.getCapability("description"));
 		// add the Perfecto native tree capability
-		caps.setCapability("automationName", "PerfectoMobile");
+	//	caps.setCapability("automationName", "PerfectoMobile");
 		
 		RemoteWebDriver driver = PerfectoUtils.getDriver(caps);
 		// open app

@@ -31,69 +31,69 @@ public class FilterPage extends BaseObject {
 		}
 
 		
-//		sets best match filter
-		public BaseObject  bestMatch(){
-			click(bestMatchRBLocator);
-			return new BaseObject(getDriver());
+		public void sortRadioButton(String button){
+			
+			switch (button) {
+	            case "Best Match": 	click(bestMatchRBLocator);
+	            					break;
+	            case "Distance":	click(distanceRBLocator);
+                     				break;
+	            case "Rating":  	click(ratingRBLocator);
+	            					break;
+			}
+            	
+			
 		}
-//		sets Distance filter
-		public BaseObject  distance(){
-			click(distanceRBLocator);
-			return new BaseObject(getDriver());
+		
+		public void distanceRadioButton(String button){
+			
+			switch (button) {
+	            case "2 blocks": 	click(twoblocksRBLocator);
+	            					break;
+	            case "6 blocks":	click(sixblocksRBLocator);
+                     				break;
+	            case "1 mile":  	click(onemileRBLocator);
+	            					break;
+	            case "5 mile":  	click(fivemilesRBLocator);
+									break;
+	            					
+			}
 		}
-//		sets rating filter
-		public BaseObject  rating(){
-			click(ratingRBLocator);
-			return new BaseObject(getDriver());
+				
+	public void $buttonPrice(Boolean turnOn){
+			if (!isChecked ($TBLocator)) 
+	        		click($TBLocator);
+			}
+	public void $$buttonPrice(Boolean turnOn){		
+	        if	(!isChecked ($$TBLocator)) 
+	        		click($$TBLocator);
+	        }
+	public void $$$buttonPrice(Boolean turnOn){        
+		    if	(!isChecked ($$$TBLocator)) 
+				    click($$$TBLocator); 
+			}
+	public void $$$$buttonPrice(Boolean turnOn){	  
+		if		(!isChecked ($$$$TBLocator)) 
+					click($$$$TBLocator);   	  
 		}
-//		sets Distance twoblocks filter
-		public BaseObject  twoblocks(){
-			click(twoblocksRBLocator);
-			return new BaseObject(getDriver());
+		
+		
+		
+		
+		public void openNowSwitch(Boolean turnOn) {
+			
+			if (!isChecked(openNowTBLocator))
+				click(openNowTBLocator);
 		}
-//		sets Distance sixblocks filter
-		public BaseObject  sixblocks(){
-			click(sixblocksRBLocator);
-			return new BaseObject(getDriver());
-		}
-//		sets onemile filter
-		public BaseObject  onemile(){
-			click(onemileRBLocator);
-			return new BaseObject(getDriver());
-		}
-//		sets fivemiles filter
-		public BaseObject  fivemiles(){
-			click(fivemilesRBLocator);
-			return new BaseObject(getDriver());
-		}
-//		sets onemile filter
-		public BaseObject  $TB(){
-			click($TBLocator);
-			return new BaseObject(getDriver());
-		}
-		public BaseObject  $$TB(){
-			click($$TBLocator);
-			return new BaseObject(getDriver());
-		}
-		public BaseObject  $$$TB(){
-			click($$$TBLocator);
-			return new BaseObject(getDriver());
-		}
-		public BaseObject  $$$$TB(){
-			click($$$$TBLocator);
-			return new BaseObject(getDriver());
-		}
-		public BaseObject  openNow(){
-			click(openNowTBLocator);
-			return new BaseObject(getDriver());
-		}
-		public BaseObject  cancel(){
+		
+
+		public void  cancel(){
 			click(cancelBTLocator);
-			return new NearByPage(driver);
+		
 		}
-		public BaseObject  ok(){
+		public void  ok(){
 			click(okBTLocator);
-			return new NearByPage(driver);
+			
 		}
 		
 

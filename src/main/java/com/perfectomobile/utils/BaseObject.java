@@ -32,24 +32,23 @@ public class BaseObject {
 		find(locator).click();
 	}
 
-	public Boolean swipeAndSearch(By locator, String start, String end, Integer attempts) {
-		boolean isFound = false;
-		while (!isFound && attempts > 0)
-		{
-			String result = find(locator).getAttribute("isvisible");
-			isFound = Boolean.valueOf(result);
-			if (!isFound) {
-				String commandStartApp = "mobile:touch:swipe";
-				Map<String, Object> paramsSwipe = new HashMap<>();
-				paramsSwipe.put("start",start);
-				paramsSwipe.put("end",end);
-				driver.executeScript(commandStartApp, paramsSwipe);
-				attempts--;
-			}
-		} 
-
-		return isFound;
-	}
+		public Boolean swipeAndSearch(By locator, String start, String end, Integer attempts) {
+			boolean isFound = false;
+			while (!isFound && attempts > 0)
+			{
+				boolean result = find(locator).isDisplayed();
+				isFound = Boolean.valueOf(result);
+				if (!isFound) {
+					String commandStartApp = "mobile:touch:swipe";
+					Map<String, Object> paramsSwipe = new HashMap<>();
+					paramsSwipe.put("start",start);
+					paramsSwipe.put("end",end);
+					driver.executeScript(commandStartApp, paramsSwipe);
+					attempts--;
+				}
+			} 
+			return isFound;
+		}
 
 	public void type(String inputText, By locator) {
 		find(locator).sendKeys(inputText);
@@ -64,6 +63,18 @@ public class BaseObject {
 		try {
 
 			return find(locator).isDisplayed();
+
+		} catch (org.openqa.selenium.NoSuchElementException exception) {
+			return false;
+
+		}
+	}
+	
+	public Boolean isChecked(By locator) {
+
+		try {
+
+			return new Boolean(find(locator).getAttribute("checked"));
 
 		} catch (org.openqa.selenium.NoSuchElementException exception) {
 			return false;

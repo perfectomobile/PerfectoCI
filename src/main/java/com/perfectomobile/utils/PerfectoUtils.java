@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ import org.openqa.selenium.remote.DriverCommand;
 import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.perfectomobile.selenium.util.EclipseConnector;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -35,6 +38,8 @@ import jxl.read.biff.BiffException;
 public class PerfectoUtils {
 
 
+
+	private static final String REPOSITORY = "PUBLIC:";
 
 	public PerfectoUtils() {
 
@@ -52,10 +57,18 @@ public class PerfectoUtils {
 			try{
 				try {
 					String host = System.getProperty("np.testHost", "qatestlab.perfectomobile.com");
-					String username = URLEncoder.encode(System.getProperty("np.testUsername", "test_automation@gmail.com"), "UTF-8");
-					String password = URLEncoder.encode(System.getProperty("np.testPassword", "Test_automation"), "UTF-8");
+					String username = System.getProperty("np.testUsername", "test_automation@gmail.com");
+					String password = System.getProperty("np.testPassword", "Test_automation");
 
-				   driver = new RemoteWebDriver(new URL("https://" + username + ':' + password + '@' + host + "/nexperience/wd/hub"), cap);
+					cap.setCapability("user", username);
+					cap.setCapability("password", password);
+//				doesn't work	
+//					EclipseConnector connector = new EclipseConnector(); 
+//					String eclipseExecutionId = connector.getExecutionId();                  
+//					cap.setCapability("eclipseExecutionId", cap); 
+//					
+					
+					driver = new RemoteWebDriver(new URL("https://" + host + "/nexperience/perfectomobile/wd/hub"), cap);
 					//driver = new RemoteWebDriver(cap);
 					System.out.println("Run started");
 					return driver;
@@ -102,7 +115,7 @@ public class PerfectoUtils {
 			// start from 1 > don't want to run on title raw
 			for (int rowNum = 1; rowNum < sheet.getRows(); rowNum++) {
 				//create DC per line 
-				capabilities = new DesiredCapabilities("mobileOS", "", Platform.ANY);
+				capabilities = new DesiredCapabilities("", "", Platform.ANY);
 
 				for (int col = 0; col < sheet.getColumns(); col++) { 
 					Cell cell = sheet.getCell(col,rowNum);
@@ -132,6 +145,20 @@ public class PerfectoUtils {
 		driver.quit();
 	}
 
+
+//	private void uploadMedia(String resource, String repositoryKey) throws URISyntaxException, IOException {
+//		repositoryKey = REPOSITORY;
+//		String FILENAME;
+//		File file = new File(FILENAME);
+//		
+//		d.uploadMedia(repositoryKey, file);
+//		File file = loadResource(resource);
+//		_driver.uploadMedia(repositoryKey, file);
+//	}
+
+	
+	
+	
 	public static void getScreenShot(RemoteWebDriver driver,String name )
 	{
 		driver   = (RemoteWebDriver) new Augmenter().augment( driver );
@@ -147,7 +174,7 @@ public class PerfectoUtils {
 	public static void installApp(String appLocation,RemoteWebDriver d )
 	{
 		Map<String,String> params = new HashMap<String,String>();
-		params.put("repo", appLocation);
+		params.put("file", appLocation);
 		d.executeScript("mobile:application:install", params);
 	}
 	

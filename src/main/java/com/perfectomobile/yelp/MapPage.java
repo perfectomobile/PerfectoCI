@@ -27,7 +27,7 @@ public class MapPage extends BaseObject {
 //		opens map	
 		public BaseObject  list(){
 			click(ListBTLocator);
-			return new MainPage(driver);
+			return new ListByPage(driver);
 		}
 
 		

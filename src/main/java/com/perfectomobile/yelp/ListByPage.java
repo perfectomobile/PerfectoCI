@@ -24,7 +24,7 @@ public class ListByPage extends BaseObject {
 //		clicks on filter
 		public BaseObject  filter(){
 			click(filterBTLocator);
-			return new BaseObject(getDriver());
+			return new FilterPage(getDriver());
 		}
 //		opens map	
 		public BaseObject  map(){

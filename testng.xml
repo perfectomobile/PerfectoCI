@@ -3,7 +3,7 @@
 <suite name="testList" parallel="classes" thread-count="5">
 	<test name="Test">
 		<classes>
-			 <class name="com.perfectomobile.test.StarbucksLogin"/>
+			 <!--  class name="com.perfectomobile.test.StarbucksLogin"/ -->
 			 <class name="com.perfectomobile.test.Yelp"/>     
 			<!--  class name="com.perfectomobile.test.test1" />  -->  
 			<!--  class name="com.perfectomobile.test.P2ELogin" /-->
