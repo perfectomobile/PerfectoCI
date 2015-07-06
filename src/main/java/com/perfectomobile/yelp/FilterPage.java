@@ -6,7 +6,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.perfectomobile.utils.BaseObject;
 
-public class FilterPage extends BaseObject {
+public class FilterPage extends YelpBaseView {
 	
 		
 		private By bestMatchRBLocator = By.xpath("//radiobutton[text()='Best Match']");

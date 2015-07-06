@@ -6,7 +6,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.perfectomobile.utils.BaseObject;
 
-public class QuickSearchPage extends BaseObject {
+public class QuickSearchPage extends YelpBaseView {
 	
 		
 		//private By searchTFLocator = By.xpath("//textfield[@resourceid='com.yelp.android:id/searchbar']");

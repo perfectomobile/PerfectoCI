@@ -1,5 +1,6 @@
 package com.perfectomobile.test;
 import java.lang.reflect.Method;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.perfectomobile.yelp.MainPage;
 import com.perfectomobile.utils.BaseObject;
 import com.perfectomobile.utils.PerfectoUtils;
@@ -19,16 +25,19 @@ import com.perfectomobile.yelp.QuickSearchPage;
 import com.perfectomobile.yelp.SearchPage;
 import com.perfectomobile.yelp.SignUpPage;
 
-public class Yelp extends BasicTest {
+public class YelpTest extends BasicTest2 {
 
-	@Test(dataProvider = "Capabilities")
-	public void search(DesiredCapabilities caps, Method method) {
+	
+	@Factory(dataProvider="factoryData")
+	public YelpTest(DesiredCapabilities caps){
+		super(caps);
+	}
+	
+	
+	@Test
+	public void search() {
 
-		RemoteWebDriver driver = null;
-		
 		try {
-			driver = beforeTest(caps);
-			
 			
 			//MainPage mainpage= new MainPage(driver);
 			//if first time or validation on yelp.com
@@ -65,20 +74,17 @@ public class Yelp extends BasicTest {
 		} catch (Exception e) {
 			System.out.println("Yelp ended with Error");
 			e.printStackTrace();
-		} finally {
-			endTest(driver);
-		}
+		} 
 
 	}
 	
-
+	@Parameters({"testCycle"})
 	@Override
-	public RemoteWebDriver beforeTest(DesiredCapabilities caps) throws Exception {
-		System.out.println("Yelp description: " + caps.getCapability("description"));
-		// add the Perfecto native tree capability
-		caps.setCapability("automationName", "PerfectoMobile");
+	@BeforeClass
+	public void beforeClass(String testCycle) throws Exception {
 		
-		RemoteWebDriver driver = PerfectoUtils.getDriver(caps);
+		super.beforeClass(testCycle);
+		
 		// open app
 		switchToContext(driver, "NATIVE_APP");
 		
@@ -87,14 +93,16 @@ public class Yelp extends BasicTest {
 			PerfectoUtils.installApp("PUBLIC:Android\\Yelp_2.5.0.apk" , driver);
 		}
 		PerfectoUtils.startApp("Yelp", driver);
-		return driver;
 
 	}
 
 	@Override
-	public void endTest(RemoteWebDriver driver) {
-	//	PerfectoUtils.uninstallApp("Yelp", driver);
-		PerfectoUtils.closeTest(driver);
+	@AfterClass
+	public void afterClass() {
+
+		PerfectoUtils.uninstallApp("Yelp", driver);
+		super.afterClass();
+		
 	}
 
 }

@@ -11,7 +11,6 @@ import org.openqa.selenium.remote.DriverCommand;
 import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 import com.perfectomobile.utils.PerfectoUtils;
 

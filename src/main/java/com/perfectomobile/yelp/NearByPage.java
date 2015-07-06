@@ -9,7 +9,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import com.perfectomobile.utils.BaseObject;
 import com.thoughtworks.selenium.webdriven.commands.GetElementIndex;
 
-public class NearByPage extends BaseObject {
+public class NearByPage extends YelpBaseView {
 	
 		
 		private By loginValidateByOCR = By.linkText("Nearby");

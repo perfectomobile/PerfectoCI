@@ -49,7 +49,7 @@ public abstract class PayPalLoginPageLinks extends BasicTest{
 		System.out.println("PayPalLoginPageLinks" + caps.getCapability("description"));
 		// add the Perfecto native tree capability
 		caps.setCapability("automationName", "PerfectoMobile");
-		RemoteWebDriver driver = PerfectoUtils.getDriver(caps);
+		RemoteWebDriver driver = PerfectoUtils.getDriver(caps, 10, 20);
 		// open app
 		
 		return driver;

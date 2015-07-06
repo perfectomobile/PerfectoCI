@@ -6,7 +6,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.perfectomobile.utils.BaseObject;
 
-public class SearchPage extends BaseObject {
+public class SearchPage extends YelpBaseView {
 	
 		private By filterBTLocator = By.xpath("//button[text()='Filter']");
 		private By mapBTLocator = By.xpath("//button[text()='Map']");

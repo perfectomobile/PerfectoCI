@@ -6,7 +6,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.perfectomobile.utils.BaseObject;
 
-public class SignUpPage extends BaseObject {
+public class SignUpPage extends YelpBaseView {
 	
 		
 		private By NoBTLocator = By.xpath("//button[text()='No, Thanks']");

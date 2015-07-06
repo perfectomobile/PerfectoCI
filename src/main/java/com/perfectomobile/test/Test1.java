@@ -13,7 +13,7 @@ public class Test1 extends BasicTest {
 	@Test(dataProvider = "Capabilities")
 	public void f12(DesiredCapabilities caps, Method method) {
 		System.out.println("Test1 in Test" + caps.getCapability("platformName"));
-		RemoteWebDriver driver = PerfectoUtils.getDriver(caps);
+		RemoteWebDriver driver = PerfectoUtils.getDriver(caps, 10, 20);
 		PerfectoUtils.getScreenShot(driver, caps.getCapability("platformName")
 				.toString() + "_" + method.getName());
 		PerfectoUtils.closeTest(driver);

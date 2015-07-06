@@ -2,11 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="testList" parallel="classes" thread-count="5">
 	<test name="Test">
+	    <parameter name="testCycle" value="Avner 2.65" />
 		<classes>
 			 <!--  class name="com.perfectomobile.test.StarbucksLogin"/ -->
-			 <class name="com.perfectomobile.test.Yelp"/>     
+			 <class name="com.perfectomobile.test.YelpTest"/>     
 			<!--  class name="com.perfectomobile.test.test1" />  -->  
 			<!--  class name="com.perfectomobile.test.P2ELogin" /-->
+			 <!-- class name="com.perfectomobile.test.WalmartItemTest"/-->  
 		</classes>
 
 

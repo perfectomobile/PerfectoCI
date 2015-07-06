@@ -52,7 +52,7 @@ public abstract class P2ELogin extends BasicTest {
 		System.out.println("P2ELogin" + caps.getCapability("description"));
 		// add the Perfecto native tree capability
 		caps.setCapability("automationName", "PerfectoMobile");
-		RemoteWebDriver driver = PerfectoUtils.getDriver(caps);
+		RemoteWebDriver driver = PerfectoUtils.getDriver(caps, 10, 20);
 		// open app
 
 		return driver;

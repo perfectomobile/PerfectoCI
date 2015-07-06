@@ -51,7 +51,7 @@ public class StarbucksLogin extends BasicTest {
 		// add the Perfecto native tree capability
 	//	caps.setCapability("automationName", "PerfectoMobile");
 		
-		RemoteWebDriver driver = PerfectoUtils.getDriver(caps);
+		RemoteWebDriver driver = PerfectoUtils.getDriver(caps, 10, 20);
 		// open app
 		switchToContext(driver, "NATIVE_APP");
 		PerfectoUtils.startApp("Starbucks", driver);
