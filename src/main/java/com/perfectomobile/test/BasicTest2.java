@@ -42,7 +42,7 @@ public abstract class BasicTest2 {
 		this.caps = caps;
 	}
 	
-	@DataProvider(name="factoryData", parallel=false)
+	@DataProvider(name="factoryData", parallel=true)
 	public static Object[][] factoryData() throws Exception {
 		
 		int ColumnsToRead = 11;
