@@ -42,7 +42,7 @@ public abstract class BasicTest2 {
 		this.caps = caps;
 	}
 	
-	@DataProvider(name="factoryData", parallel=false)
+	@DataProvider(name="factoryData", parallel=true)
 	public static Object[][] factoryData() throws Exception {
 		
 		int ColumnsToRead = 11;
@@ -57,7 +57,7 @@ public abstract class BasicTest2 {
 	
 	
 	//TBD : change the read from execl 
-	private static Object[][] getCapabilitiesArrary(Object[][] s) throws Exception {
+	protected static Object[][] getCapabilitiesArrary(Object[][] s) throws Exception {
 		
 		int sSize = s.length;
 		Object [][] k = new Object[sSize][1];

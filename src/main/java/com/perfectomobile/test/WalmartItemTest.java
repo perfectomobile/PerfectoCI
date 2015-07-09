@@ -6,6 +6,7 @@ import java.util.Random;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.Reporter;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -17,12 +18,11 @@ import com.perfectomobile.walmartPOM.SearchItemsPageView;
 import com.perfectomobile.walmartPOM.WalmartBaseView;
 
 public class WalmartItemTest extends BasicTest2 {
-
+	
 	@Factory(dataProvider="factoryData")
 	public WalmartItemTest(DesiredCapabilities caps){
 		super(caps);
 	}
-	
 	@Test (dataProvider = "searchItemsData")
 	public void searchItemsTest(String itemSerial, String itemDescription, String itemPrice) throws Exception {
 		boolean testFail = false;
@@ -38,7 +38,7 @@ public class WalmartItemTest extends BasicTest2 {
 		  ed.setWorkbook(absolutePath);
 	 	  ed.setSheet(this.deviceDesc, true);
 	 	  ed.setTestCycle(this.testCycle, true);
-	 	  
+	 	  Reporter.log(String.valueOf(Thread.currentThread().getId()));
 	 	  try{
     	
 	    	//this.driver.get("http://google.com");
@@ -97,10 +97,11 @@ public class WalmartItemTest extends BasicTest2 {
 		  return s;
 	}
 	
-	
-	//@Test(dataProvider="itemsDP2")
+/*	
+	@Test(dataProvider="itemsDP2")
 	public void secondTest(String testParam) throws InterruptedException{
-		Reporter.log("Mock Test: " + this.testName + " - " + testParam);
+//		Reporter.log("Mock Test: " + this.testName + " - " + testParam);
+		Reporter.log(String.valueOf(Thread.currentThread().getId()));
 		Random rand = new Random();
 		int  n = rand.nextInt(3000) + 1;
 		Thread.sleep(n);
@@ -112,6 +113,6 @@ public class WalmartItemTest extends BasicTest2 {
 		 return new Object[][]{{"0"}, {"1"}, {"2"}, {"3"}};
 		 
 	 }
-
+*/
 
 }

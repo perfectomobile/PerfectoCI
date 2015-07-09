@@ -43,6 +43,7 @@ import com.google.common.base.Function;
 //import com.perfectomobile.selenium.util.EclipseConnector;
 
 
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -67,52 +68,42 @@ public class PerfectoUtils {
 		boolean waitForDevice = true;
 		int index = retries;
 		do {
-			try{
-				try {
-					String host = System.getProperty("np.testHost", "qatestlab.perfectomobile.com");
-					String username = System.getProperty("np.testUsername", "test_automation@gmail.com");
-					String password = System.getProperty("np.testPassword", "Test_automation");
-					
-//					String host = System.getProperty("np.testHost", "demo.perfectomobile.com");
-//					String username = System.getProperty("np.testUsername", "avnerg@perfectomobile.com");
-//					String password = System.getProperty("np.testPassword", "scvuanbsh");
-					
-					
+			try {
+//					String host = System.getProperty("np.testHost", "qatestlab.perfectomobile.com");
+//					String username = System.getProperty("np.testUsername", "test_automation@gmail.com");
+//					String password = System.getProperty("np.testPassword", "Test_automation");
+				
+				String host = System.getProperty("np.testHost", "demo.perfectomobile.com");
+				String username = System.getProperty("np.testUsername", "avnerg@perfectomobile.com");
+				String password = System.getProperty("np.testPassword", "scvuanbsh");
+				
+				
 
-					cap.setCapability("user", username);
-					cap.setCapability("password", password);
-					
+				cap.setCapability("user", username);
+				cap.setCapability("password", password);
+				
 //				doesn't work	
 //					EclipseConnector connector = new EclipseConnector(); 
 //					String eclipseExecutionId = connector.getExecutionId();                  
 //					cap.setCapability("eclipseExecutionId", cap); 
 //					
-					
-					driver = new RemoteWebDriver(new URL("https://" + host + "/nexperience/perfectomobile/wd/hub"), cap);
-					//driver = new RemoteWebDriver(cap);
-					System.out.println("Run started");
-					return driver;
+				
+				driver = new RemoteWebDriver(new URL("https://" + host + "/nexperience/perfectomobile/wd/hub"), cap);
+				//driver = new RemoteWebDriver(cap);
+				System.out.println("Driver Created");
+				return driver;
 
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				waitForDevice = false;
-			}
-
-			catch (WebDriverException e) {
+			} catch (Exception e) {
 				index--;
-				System.out.println("device not found, index = " + index);
-				System.out.println("Current capabilities " + cap.toString());
+				System.out.println("device not found: " + cap.toString() +"\n Retries left: " + index);
+				//System.out.println();
 				sleep(retryIntervalSeconds * 1000);
 				if (e.getMessage().contains("command browser open")) {
 					waitForDevice = false;
 				}
 			}
-
+				//waitForDevice = false;
 		} while (waitForDevice && index > 0);
-		
 		return null;
 
 	}
@@ -372,12 +363,12 @@ public class PerfectoUtils {
 				  return null;
 			  }        
 		  }
-		  filePath+= "//";
+		  filePath+= "\\";		  
 		  File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		  String filename = filePath + getDateAndTime(0) + ".png";
-		  
+		  System.out.println(filename);
 			try {
-				FileUtils.copyFile(scrFile, new File("c:\\test\\"+filename+".png"));
+				FileUtils.copyFile(scrFile, new File(filename+".png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -390,7 +381,6 @@ public class PerfectoUtils {
 
 	  public static DesiredCapabilities getCapabilites(String deviceName, String platformName, String platformVersion, String manufacturer,
 			  String deviceModel, String deviceResolution, String deviceNetwork, String deviceLocation, String deviceDescription, String browserName, String automationName) throws Exception{
-		  
 		  
 		  DesiredCapabilities capabilities = new DesiredCapabilities(browserName, "", Platform.ANY);
 		  		  
