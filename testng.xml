@@ -4,13 +4,15 @@
 	<test name="Test" parallel="instances">
 	    <parameter name="testCycle" value="Avner 2.86" />
 		<classes>
-			 <!--  class name="com.perfectomobile.test.StarbucksLogin"/ -->
-			 <!-- <class name="com.perfectomobile.test.YelpTest"/>  -->     
+		    <!-- parameter name="capabilitiesFilePath" value="testData2.xlsx" /-->
+			 <class name="com.perfectomobile.test.StarbucksLogin2"/>
+			 <class name="com.perfectomobile.test.YelpTest"/>     
 			<!--  class name="com.perfectomobile.test.test1" />  -->  
 			<!--  class name="com.perfectomobile.test.P2ELogin" /-->
-			<class name="com.perfectomobile.test.WalmartItemTest" />
-			<class name="com.perfectomobile.test.WalmartAddressTest" />
+			<!-- class name="com.perfectomobile.test.WalmartItemTest" /-->
+			<!--  class name="com.perfectomobile.test.WalmartAddressTest" /-->
 		</classes>
+
 
 
 	</test> <!-- Test -->

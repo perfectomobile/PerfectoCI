@@ -1,4 +1,5 @@
 package com.perfectomobile.test;
+import java.io.File;
 import java.lang.reflect.Method;
 
 import org.openqa.selenium.By;
@@ -10,6 +11,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -28,10 +30,27 @@ import com.perfectomobile.yelp.SignUpPage;
 public class YelpTest extends BasicTest2 {
 
 	
+	protected static String capabilitiesFilePath = "YelpTestData.xlsx";
+	
+	
 	@Factory(dataProvider="factoryData")
 	public YelpTest(DesiredCapabilities caps){
 		super(caps);
 	}
+
+	@DataProvider(name="factoryData", parallel=true)
+	public static Object[][] factoryData() throws Exception {
+		
+		int ColumnsToRead = 11;
+		
+		 ClassLoader classLoader = PerfectoUtils.class.getClassLoader();
+		 File inputWorkbook = new File(classLoader.getResource(capabilitiesFilePath).getFile());
+		
+		 Object[][] s = generateArrayFromExcel(inputWorkbook, "devices", ColumnsToRead);		
+		 Object [][] k = getCapabilitiesArrary(s);
+		 return k;
+	}
+	
 	
 	
 	@Test

@@ -19,10 +19,29 @@ import com.perfectomobile.walmartPOM.WalmartBaseView;
 
 public class WalmartItemTest extends BasicTest2 {
 	
+	
+	protected static String capabilitiesFilePath = "testData.xlsx";
+	
 	@Factory(dataProvider="factoryData")
 	public WalmartItemTest(DesiredCapabilities caps){
 		super(caps);
 	}
+
+	
+	@DataProvider(name="factoryData", parallel=true)
+	public static Object[][] factoryData() throws Exception {
+		
+		int ColumnsToRead = 11;
+		
+		 ClassLoader classLoader = PerfectoUtils.class.getClassLoader();
+		 File inputWorkbook = new File(classLoader.getResource(capabilitiesFilePath).getFile());
+		
+		 Object[][] s = generateArrayFromExcel(inputWorkbook, "devices", ColumnsToRead);		
+		 Object [][] k = getCapabilitiesArrary(s);
+		 return k;
+	}
+	
+	
 	@Test (dataProvider = "searchItemsData")
 	public void searchItemsTest(String itemSerial, String itemDescription, String itemPrice) throws Exception {
 		boolean testFail = false;

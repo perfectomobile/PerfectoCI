@@ -26,17 +26,34 @@ import com.perfectomobile.walmartPOM.WalmartBaseView;
 
 public class WalmartAddressTest extends BasicTest2{
 
-  @Factory(dataProvider="factoryData")
-  public WalmartAddressTest(DesiredCapabilities caps) {
-	  super(caps);
-	// TODO Auto-generated constructor stub
-}
-  @Test (dataProvider="searchStoresDP")
-  public void searchStores(String searchedAddress, String strIdx, String storeAddress) throws Exception{	 
- 	 boolean testFail = false;	
- 	ClassLoader classLoader = PerfectoUtils.class.getClassLoader();
-	  File inputWorkbook = new File(classLoader.getResource("testResults.xlsx").getFile());
-	  String absolutePath = inputWorkbook.getAbsolutePath();
+	protected static String capabilitiesFilePath = "testData.xlsx";
+	
+	  @Factory(dataProvider="factoryData")
+	  public WalmartAddressTest(DesiredCapabilities caps) {
+		  super(caps);
+		// TODO Auto-generated constructor stub
+	  }
+  
+	  @DataProvider(name="factoryData", parallel=true)
+	  public static Object[][] factoryData() throws Exception {
+		
+		int ColumnsToRead = 11;
+		
+		 ClassLoader classLoader = PerfectoUtils.class.getClassLoader();
+		 File inputWorkbook = new File(classLoader.getResource(capabilitiesFilePath).getFile());
+		
+		 Object[][] s = generateArrayFromExcel(inputWorkbook, "devices", ColumnsToRead);		
+		 Object [][] k = getCapabilitiesArrary(s);
+		 return k;
+	  }
+  
+  
+	@Test (dataProvider="searchStoresDP")
+	public void searchStores(String searchedAddress, String strIdx, String storeAddress) throws Exception{	 
+		boolean testFail = false;	
+		ClassLoader classLoader = PerfectoUtils.class.getClassLoader();
+		File inputWorkbook = new File(classLoader.getResource("testResults.xlsx").getFile());
+		String absolutePath = inputWorkbook.getAbsolutePath();
 	  
 	// Open workbook
 	  ExcelDriver ed = new ExcelDriver();

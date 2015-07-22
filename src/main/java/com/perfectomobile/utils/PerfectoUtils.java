@@ -69,16 +69,10 @@ public class PerfectoUtils {
 		int index = retries;
 		do {
 			try {
-//					String host = System.getProperty("np.testHost", "qatestlab.perfectomobile.com");
-//					String username = System.getProperty("np.testUsername", "test_automation@gmail.com");
-//					String password = System.getProperty("np.testPassword", "Test_automation");
+				String host = System.getProperty("np.testHost", "qatestlab.perfectomobile.com");
+				String username = System.getProperty("np.testUsername", "test_automation@gmail.com");
+				String password = System.getProperty("np.testPassword", "Test_automation");
 				
-				String host = System.getProperty("np.testHost", "demo.perfectomobile.com");
-				String username = System.getProperty("np.testUsername", "avnerg@perfectomobile.com");
-				String password = System.getProperty("np.testPassword", "scvuanbsh");
-				
-				
-
 				cap.setCapability("user", username);
 				cap.setCapability("password", password);
 				

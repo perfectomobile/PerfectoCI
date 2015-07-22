@@ -42,7 +42,7 @@ public abstract class BasicTest2 {
 		this.caps = caps;
 	}
 	
-	@DataProvider(name="factoryData", parallel=true)
+	/*@DataProvider(name="factoryData", parallel=true)
 	public static Object[][] factoryData() throws Exception {
 		
 		int ColumnsToRead = 11;
@@ -53,7 +53,7 @@ public abstract class BasicTest2 {
 		 Object[][] s = generateArrayFromExcel(inputWorkbook, "devices", ColumnsToRead);		
 		 Object [][] k = getCapabilitiesArrary(s);
 		 return k;
-	}
+	}*/
 	
 	
 	//TBD : change the read from execl 
@@ -86,12 +86,13 @@ public abstract class BasicTest2 {
 	}
  
   
-	@Parameters({"testCycle"})
+	@Parameters({"testCycle", "capabilitiesFilePath"})
 	@BeforeClass 
 	public void beforeClass(String testCycle) throws Exception{
 
 		System.out.println("Run started");
 		this.testCycle = testCycle;
+		this.capabilitiesFilePath = capabilitiesFilePath;
 		
 		
 		if(this.caps.getCapability("deviceName") != null){
