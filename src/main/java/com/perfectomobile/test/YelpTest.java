@@ -29,13 +29,13 @@ import com.perfectomobile.yelp.SignUpPage;
 
 public class YelpTest extends BasicTest2 {
 
-	
 	protected static String capabilitiesFilePath = "YelpTestData.xlsx";
 	
 	
 	@Factory(dataProvider="factoryData")
 	public YelpTest(DesiredCapabilities caps){
 		super(caps);
+		automationName = PERFECTO_MOBILE_AUTOMATION_NAME;  
 	}
 
 	@DataProvider(name="factoryData", parallel=true)
@@ -91,7 +91,7 @@ public class YelpTest extends BasicTest2 {
 			Assert.assertEquals(textElement.getText(), "Lot");
 			
 		} catch (Exception e) {
-			System.out.println("Yelp ended with Error");
+			System.out.println("**************Yelp ended with Error**************");
 			e.printStackTrace();
 		} 
 

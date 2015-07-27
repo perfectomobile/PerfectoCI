@@ -60,7 +60,11 @@ public class PerfectoUtils {
 
 	}
 
-	public static RemoteWebDriver getDriver(DesiredCapabilities cap,int retries, int retryIntervalSeconds)
+	public static RemoteWebDriver getDriver(DesiredCapabilities cap, int retries, int retryIntervalSeconds) {
+		return getDriver(cap, retries, retryIntervalSeconds, "");
+	}
+	
+	public static RemoteWebDriver getDriver(DesiredCapabilities cap, int retries, int retryIntervalSeconds, String automationName)
 	{
 		System.out.println("Current capabilities " + cap.toString());
 
@@ -75,6 +79,8 @@ public class PerfectoUtils {
 				
 				cap.setCapability("user", username);
 				cap.setCapability("password", password);
+
+				cap.setCapability("automationName", automationName);
 				
 //				doesn't work	
 //					EclipseConnector connector = new EclipseConnector(); 
